@@ -21,7 +21,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             set -e
-            source ~/.nvm/nvm.sh   # só se der "command not found"
             cd /opt/SCAP-Admin
             git checkout develop
             git pull origin develop
