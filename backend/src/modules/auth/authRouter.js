@@ -65,7 +65,7 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.post("/login", authMiddleware, login);
+router.post("/login", login);
 
 /**
  * @openapi
