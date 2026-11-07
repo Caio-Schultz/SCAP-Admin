@@ -20,9 +20,20 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd ~/SCAP-Admin
+            set -e
+            source ~/.nvm/nvm.sh   # só se der "command not found"
+            cd /opt/SCAP-Admin
             git checkout develop
             git pull origin develop
+
+            cd backend
+            npm ci
+
+            cd ../frontend
+            npm ci
+            npm run build
+
+            pm2 restart server --update-env
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
