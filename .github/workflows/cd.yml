@@ -20,17 +20,22 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            command_timeout: 15m
+  
             set -e
             cd /opt/SCAP-Admin
+            git fetch origin
             git checkout develop
             git pull origin develop
 
             cd backend
-            npm ci
+            npm ci --omit=dev --no-audit --no-fund
+            cd ..
 
-            cd ../frontend
-            npm ci
-            npm run build
+            cd frontend
+            npm ci --no-audit --no-fund
+            NODE_OPTIONS=--max-old-space-size=768 npm run build
+            cd ..
 
             pm2 restart server --update-env
 
