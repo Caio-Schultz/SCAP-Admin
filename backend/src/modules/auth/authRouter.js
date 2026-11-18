@@ -65,7 +65,9 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.post("/login", login);
+router.post("/login", authMiddleware, login);
+
+// teste deploy
 
 /**
  * @openapi
