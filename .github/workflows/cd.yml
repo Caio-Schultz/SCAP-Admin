@@ -36,8 +36,8 @@ jobs:
             set -e
             cd /opt/SCAP-Admin
             git fetch origin
-            git checkout main
-            git reset --hard origin/main
+            git checkout develop
+            git reset --hard origin/develop
 
             node -e 'const [major, minor] = process.versions.node.split(".").map(Number); process.exit(major > 22 || (major === 22 && minor >= 18) ? 0 : 1)' || { echo "Node.js 22.18+ e necessario para o Prisma"; exit 1; }
 

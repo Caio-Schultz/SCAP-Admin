@@ -3,7 +3,6 @@ name: CI
 on:
   push:
     branches:
-      - main
       - develop
   pull_request:
     branches:
@@ -80,11 +79,11 @@ jobs:
         working-directory: backend
         run: npm run lint
 
-  deploy-main:
+  deploy-develop:
     needs:
       - test-backend
       - build-frontend
       - lint-backend
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
     uses: ./.github/workflows/cd.yml
     secrets: inherit
