@@ -70,9 +70,17 @@ jobs:
           echo "Aplicacao nao respondeu depois de 60 segundos"
           exit 1
 
+      - name: Setup Chrome
+        id: chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+          install-chromedriver: true
+
       - name: Smoke test (Selenium)
         env:
           APP_URL: http://${{ secrets.EC2_HOST }}
+          CHROME_BIN: ${{ steps.chrome.outputs.chrome-path }}
         run: |
           cd frontend
           npm run test:selenium
