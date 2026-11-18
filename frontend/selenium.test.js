@@ -36,4 +36,15 @@ async function runTest() {
     if (title === '' || title.includes('SCAP Admin')) {
       console.log('Test PASSED');
     } else {
-      throw new Error(`Titulo
+      throw new Error('Titulo inesperado: "' + title + '"');
+    }
+  } catch (error) {
+    console.error('Test FAILED:', error);
+    exitCode = 1;
+  } finally {
+    await driver.quit();
+  }
+  process.exit(exitCode);
+}
+
+runTest();
