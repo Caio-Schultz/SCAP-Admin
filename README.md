@@ -13,9 +13,9 @@ O **SCAP** é uma solução moderna e completa para a gestão de segurança, fre
 
 ## CI/CD
 
-Abra um PR da branch de feature para `develop`. A CI instala as dependências com `npm ci`, executa os testes do backend e compila o frontend; o lint do backend é informativo e não bloqueia o fluxo. Se a CI passar, o GitHub Actions mescla o PR em `develop`, promove `develop` para `main` e executa o deploy da `main` na EC2. O deploy atualiza o checkout da instância para `origin/main`, aplica as migrations, reinicia o backend e roda verificações de disponibilidade e Selenium.
+Abra um PR da branch de feature para `develop`. A CI instala as dependências com `npm ci`, executa os testes do backend e compila o frontend; o lint do backend é informativo e não bloqueia o fluxo. Ao mesclar o PR em `develop`, CI e CD são iniciados em paralelo: o deploy não espera o resultado da CI. Configure uma regra de proteção em `develop` para exigir os testes e o build antes do merge. A instância atualiza o checkout para `origin/develop`, aplica as migrations, reinicia o backend e roda verificações de disponibilidade e Selenium. A aplicação em produção acompanha `develop`, não `main`.
 
-Para permitir a promoção sem confirmação manual, habilite permissões de escrita para GitHub Actions e configure as regras de `develop` e `main` para permitir que `github-actions[bot]` faça os merges e atualize `main`. PRs originados de forks também são promovidos: apenas o commit exato aprovado pela CI pode ser mesclado. A instância EC2 precisa usar Node.js 22.18 ou superior para instalar e executar a versão atual do Prisma.
+A instância EC2 precisa usar Node.js 22.18 ou superior para instalar e executar a versão atual do Prisma.
 
 ---
 
