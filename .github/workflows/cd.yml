@@ -1,7 +1,9 @@
 name: CD - Deploy to EC2
 
 on:
-  workflow_call:
+  push:
+    branches:
+      - develop
 
 concurrency:
   group: deploy-ec2

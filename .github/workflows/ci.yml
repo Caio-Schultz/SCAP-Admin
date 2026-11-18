@@ -78,12 +78,3 @@ jobs:
       - name: Run lint (Backend)
         working-directory: backend
         run: npm run lint
-
-  deploy-develop:
-    needs:
-      - test-backend
-      - build-frontend
-      - lint-backend
-    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
-    uses: ./.github/workflows/cd.yml
-    secrets: inherit
