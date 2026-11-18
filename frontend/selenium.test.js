@@ -11,6 +11,10 @@ async function runTest() {
   options.addArguments('--disable-dev-shm-usage');
   options.addArguments('--window-size=1280,800');
 
+  if (process.env.CHROME_BIN) {
+    options.setChromeBinaryPath(process.env.CHROME_BIN);
+  }
+
   const driver = await new Builder()
     .forBrowser('chrome')
     .setChromeOptions(options)
