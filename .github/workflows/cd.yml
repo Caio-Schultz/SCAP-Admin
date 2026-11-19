@@ -3,7 +3,10 @@ name: CD - Deploy to EC2
 on:
   push:
     branches:
-      - develop
+      - main
+
+permissions:
+  contents: read
 
 concurrency:
   group: deploy-ec2
@@ -37,9 +40,8 @@ jobs:
           script: |
             set -e
             cd /opt/SCAP-Admin
-            git fetch origin
-            git checkout develop
-            git reset --hard origin/develop
+            git fetch origin main
+            git checkout -B main origin/main
 
             node -e 'const [major, minor] = process.versions.node.split(".").map(Number); process.exit(major > 22 || (major === 22 && minor >= 18) ? 0 : 1)' || { echo "Node.js 22.18+ e necessario para o Prisma"; exit 1; }
 
