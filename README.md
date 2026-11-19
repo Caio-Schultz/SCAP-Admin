@@ -11,6 +11,14 @@ O **SCAP** é uma solução moderna e completa para a gestão de segurança, fre
 
 ---
 
+## CI/CD
+
+Abra um PR da branch de feature para `develop`. A CI instala as dependências com `npm ci`, executa os testes do backend e compila o frontend; o lint do backend é informativo e não bloqueia o fluxo. Ao mesclar o PR em `develop`, CI e CD são iniciados em paralelo: o deploy não espera o resultado da CI. Configure uma regra de proteção em `develop` para exigir os testes e o build antes do merge. A instância atualiza o checkout para `origin/develop`, aplica as migrations, reinicia o backend e roda verificações de disponibilidade e Selenium. A aplicação em produção acompanha `develop`, não `main`.
+
+A instância EC2 precisa usar Node.js 22.18 ou superior para instalar e executar a versão atual do Prisma.
+
+---
+
 ## 📋 Pré-requisitos
 
 Antes de iniciar, certifique-se de ter instalado em sua máquina:

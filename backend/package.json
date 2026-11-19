@@ -10,28 +10,29 @@
     "test:unit": "node --experimental-vm-modules node_modules/jest-cli/bin/jest.js tests/unit",
     "test:integration": "node --experimental-vm-modules node_modules/jest-cli/bin/jest.js tests/integration",
     "test:coverage": "node --experimental-vm-modules node_modules/jest-cli/bin/jest.js --coverage",
-    "lint": "eslint \"src/**/*.js\""
+    "lint": "eslint \"src/**/*.js\"",
+    "pretest": "prisma generate"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "@prisma/client": "^6.7.0",
+    "@prisma/client": "^6.19.3",
     "bcrypt": "^6.0.0",
+    "dotenv": "^18.0.10",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
+    "prisma": "^6.19.3",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@jest/globals": "^30.4.1",
-    "dotenv": "^17.4.2",
     "eslint": "^10.3.0",
     "globals": "^17.6.0",
-    "jest": "^30.4.2",
-    "prisma": "^6.7.0"
+    "jest": "^30.4.2"
   },
   "jest": {
     "testMatch": [
